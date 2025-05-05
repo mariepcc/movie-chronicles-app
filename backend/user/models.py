@@ -78,3 +78,24 @@ def create_user_profile(sender, instance, created, **kwargs):
 @receiver(post_save, sender=get_user_model())
 def save_user_profile(sender, instance, **kwargs):
     instance.profile.save()
+
+
+class Movie(models.Model):
+    WATCHLIST = 'watchlist'
+    WATCHED = 'watched'
+    MOVIE_STATUS_CHOICES = [
+            (WATCHLIST, 'Watchlist'),
+            (WATCHED, 'Watched'),
+        ]
+    original_title = models.TextField()
+    tmdb_id = models.IntegerField(null=True)
+    overview = models.TextField()
+    release_date = models.TextField()
+    vote_average = models.TextField()
+    status = models.TextField(max_length=10, choices=MOVIE_STATUS_CHOICES, default=WATCHLIST)
+    rating = models.IntegerField(null=True, blank=True)
+    poster_path = models.TextField(null=True)
+    author = models.ForeignKey(User, on_delete=models.CASCADE)
+
+    def __str__(self):
+        return self.original_title

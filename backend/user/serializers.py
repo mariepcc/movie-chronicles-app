@@ -1,6 +1,8 @@
 from rest_framework import serializers
 from django.conf import settings
 from django.contrib.auth import get_user_model
+from .models import Movie
+
 
 
 class RegistrationSerializer(serializers.ModelSerializer):
@@ -45,3 +47,14 @@ class UserSerializer(serializers.ModelSerializer):
     class Meta:
         model = get_user_model()
         fields = ("id", "email", "is_staff", "first_name", "last_name")
+
+
+class MovieSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Movie
+        fields = ["id", "original_title", "tmdb_id", "overview", "release_date", "vote_average", "status", "rating", "poster_path", "author"]
+        extra_kwargs = {"author": {"read_only":True}}
+
+class RecommendationSerializer(serializers.Serializer):
+    movie = serializers.CharField()
+    predicted_rating = serializers.CharField()

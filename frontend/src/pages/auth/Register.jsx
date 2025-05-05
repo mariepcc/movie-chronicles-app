@@ -1,6 +1,16 @@
 import { useRef, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { axiosInstance } from '../../api/apiConfig'
+import {
+    Box,
+    Button,
+    FormControl,
+    FormLabel,
+    Input,
+    Heading,
+    VStack,
+    useToast,
+  } from '@chakra-ui/react';
 
 export default function Register() {
     const navigate = useNavigate()
@@ -37,28 +47,49 @@ export default function Register() {
     }
 
     return (
-        <div className='container'>
-            <h2>Register</h2>
-            <form onSubmit={onSubmitForm}>
-                <div className="mb-3">
-                    <input type="text" placeholder='First Name' autoComplete='off' className='form-control' id='first_name' ref={first_name} />
-                </div>
-                <div className="mb-3">
-                    <input type="text" placeholder='Last Name' autoComplete='off' className='form-control' id='last_name' ref={last_name} />
-                </div>
-                <div className="mb-3">
-                    <input type="email" placeholder='Email' autoComplete='off' className='form-control' id="email" ref={email} />
-                </div>
-                <div className="mb-3">
-                    <input type="password" placeholder='Password' autoComplete='off' className='form-control' id="password" ref={password} />
-                </div>
-                <div className="mb-3">
-                    <input type="password" placeholder='Confirm Password' autoComplete='off' className='form-control' id="passwordConfirmation" ref={password2} />
-                </div>
-                <div className="mb-3">
-                    <button disabled={loading} className='btn btn-success' type="submit">Login</button>
-                </div>
-            </form>
-        </div>
-    )
+    <Box maxW="md" mx="auto" mt={10} p={8} borderWidth={1} borderRadius="lg" boxShadow="lg">
+      <Heading as="h2" size="lg" mb={6} textAlign="center">
+        Register
+      </Heading>
+      <form onSubmit={onSubmitForm}>
+        <VStack spacing={4}>
+          <FormControl isRequired>
+            <FormLabel>First Name</FormLabel>
+            <Input type="text" placeholder="First Name" ref={first_name} autoComplete="off" />
+          </FormControl>
+
+          <FormControl isRequired>
+            <FormLabel>Last Name</FormLabel>
+            <Input type="text" placeholder="Last Name" ref={last_name} autoComplete="off" />
+          </FormControl>
+
+          <FormControl isRequired>
+            <FormLabel>Email</FormLabel>
+            <Input type="email" placeholder="Email" ref={email} autoComplete="off" />
+          </FormControl>
+
+          <FormControl isRequired>
+            <FormLabel>Password</FormLabel>
+            <Input type="password" placeholder="Password" ref={password} autoComplete="off" />
+          </FormControl>
+
+          <FormControl isRequired>
+            <FormLabel>Confirm Password</FormLabel>
+            <Input type="password" placeholder="Confirm Password" ref={password2} autoComplete="off" />
+          </FormControl>
+
+          <Button
+            colorScheme="teal"
+            type="submit"
+            isLoading={loading}
+            loadingText="Registering..."
+            width="full"
+          >
+            Register
+          </Button>
+        </VStack>
+      </form>
+    </Box>
+  );
+    
 }
