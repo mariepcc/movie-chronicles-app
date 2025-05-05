@@ -15,11 +15,13 @@ const ModalComponent = ({ isOpen, onClose, movie, content }) => {
     <Modal isOpen={isOpen} onClose={onClose} size="2xl">
       <ModalOverlay />
       <ModalContent>
-        <ModalHeader>{movie.original_title} - movie ending explained:</ModalHeader>
+        <ModalHeader>
+          {movie.original_title} - movie ending explained:
+        </ModalHeader>
         <ModalCloseButton />
-        <ModalBody><Box whiteSpace="pre-wrap">
-    {content}
-  </Box></ModalBody>
+        <ModalBody>
+          <Box whiteSpace="pre-wrap">{content}</Box>
+        </ModalBody>
         <ModalFooter>
           <Button variantColor="blue" mr={3} onClick={onClose}>
             Close

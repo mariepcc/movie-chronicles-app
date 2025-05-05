@@ -5,6 +5,7 @@ import useAxiosPrivate from "../hooks/usePrivate";
 import { DeleteIcon, ViewIcon } from "@chakra-ui/icons";
 import {
   VStack,
+  HStack,
   Text,
   Button,
   Heading,
@@ -83,7 +84,6 @@ export default function MovieCard({ status, movie, fetchData }) {
       .catch((error) => alert(error));
   };
 
-  
   const addMovie = async (movie) => {
     axiosPrivateInstance
       .post("auth/movies", {
@@ -150,7 +150,7 @@ export default function MovieCard({ status, movie, fetchData }) {
         sm="50%"
         lg="25%"
         p={4}
-        minH="250px"
+        maxH="500px"
         display="flex"
         flexDirection="column"
         justifyContent="space-between"
@@ -183,18 +183,21 @@ export default function MovieCard({ status, movie, fetchData }) {
             Rating: {movie.vote_average ? movie.vote_average : "N/A"}
           </Badge>
         </Flex>
-        <Center flexGrow={1} align="center">
-          <Heading
-            size="sm"
-            maxW="100px"
-            textAlign="center"
-            wordBreak="break-word"
-            lineHeight="normal"
-            className="title-text"
-          >
-            {movie.original_title}
-          </Heading>
-        </Center>
+        <Box height="50px">
+          <Center height="100%">
+            <Heading
+              size="sm"
+              maxW="100px"
+              textAlign="center"
+              wordBreak="break-word"
+              lineHeight="normal"
+              noOfLines={3}
+              className="title-text"
+            >
+              {movie.original_title}
+            </Heading>
+          </Center>
+        </Box>
       </Box>
 
       {status === "watched" && !movie.rating && (
@@ -212,7 +215,8 @@ export default function MovieCard({ status, movie, fetchData }) {
           <Tooltip label="Want to know ending explained?">
             <Icon
               name="helpSquare"
-              boxSize={5}
+              boxSize={7}
+              paddingBottom={3}
               color="gray.500"
               className="cursor-pointer hover:text-blue-500"
               onClick={() => {
@@ -233,34 +237,36 @@ export default function MovieCard({ status, movie, fetchData }) {
       )}
       {status === "watchlist" && (
         <>
-          <Button
-            size="sm"
-            w="100px"
-            leftIcon={<DeleteIcon color="white" boxSize={4} />}
-            variant="outline"
-            colorScheme="white"
-            onClick={() => deleteMovie(movie.id, status)}
-          >
-            Delete
-          </Button>
-          <Button
-            size="sm"
-            w="100px"
-            leftIcon={<ViewIcon color="white" boxSize={4} />}
-            variant="outline"
-            colorScheme="white"
-            onClick={() => moveFilm(movie.id)}
-          >
-            Watched
-          </Button>
+          <VStack spacing={2} align="center" paddingBottom={5}>
+            <Button
+              size="sm"
+              w="90px"
+              leftIcon={<DeleteIcon color="white" boxSize={4} />}
+              variant="outline"
+              colorScheme="white"
+              onClick={() => deleteMovie(movie.id, status)}
+            >
+              Delete
+            </Button>
+            <Button
+              size="sm"
+              w="90px"
+              leftIcon={<ViewIcon color="white" boxSize={4} />}
+              variant="outline"
+              colorScheme="white"
+              onClick={() => moveFilm(movie.id)}
+            >
+              Watched
+            </Button>
+          </VStack>
         </>
       )}
       {status === "recommended" && (
         <>
           <Button
-            w="110px"
+            w="90px"
             h="70px"
-            p={2}
+            p={1}
             display="flex"
             flexDirection="column"
             justifyContent="space-between"

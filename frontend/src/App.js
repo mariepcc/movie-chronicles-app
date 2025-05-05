@@ -22,12 +22,12 @@ function App() {
             <Route path="login" element={<Login />}></Route>
             <Route path="register" element={<Register />}></Route>
             <Route element={<AuthMiddleware />}>
-            <Route path='user' element={<User />} />
-            <Route path='discover' element={<Discover />} />
-            <Route path='watchlist' element={<Watchlist />} />
-            <Route path='watched' element={<Watched />} />
-            <Route path='recommended' element={<Recommended />} />
-          </Route>
+              <Route path="user" element={<User />} />
+              <Route path="discover" element={<Discover />} />
+              <Route path="watchlist" element={<Watchlist />} />
+              <Route path="watched" element={<Watched />} />
+              <Route path="recommended" element={<Recommended />} />
+            </Route>
           </Route>
         </Route>
         <Route path="*" element={<Navigate to="/" />}></Route>

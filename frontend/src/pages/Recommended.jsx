@@ -2,17 +2,21 @@ import { useEffect, useState } from "react";
 import CircleLoader from "react-spinners/CircleLoader";
 import useAxiosPrivate from "../hooks/usePrivate";
 import MovieCard from "../components/MovieCard";
+import useAuth from "../hooks/useAuth";
 import { VStack, SimpleGrid, Text, Center } from "@chakra-ui/react";
 
 export default function Recommended({ refreshData }) {
+  const { isLoggedIn } = useAuth();
   const [isLoading, setIsLoading] = useState(false);
   const [loadedOnce, setLoadedOnce] = useState(false);
   const [recommendations, setRecommendations] = useState([]);
   const axiosPrivateInstance = useAxiosPrivate();
 
   useEffect(() => {
-    getRecommendations();
-  }, []);
+    if (isLoggedIn) {
+      getRecommendations();
+    }
+  }, [isLoggedIn]);
 
   const getRecommendations = async () => {
     setIsLoading(true);

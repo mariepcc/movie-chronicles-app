@@ -6,6 +6,7 @@ import {
   VStack,
   Text,
   Button,
+  Box,
   Heading,
   Center,
   Badge,
@@ -24,22 +25,24 @@ export default function MovieCardDiscover({ movie, userMovies, fetchData }) {
       ref,
     });
 
-    const isInWatchlist = userMovies.some(
-      (m) => m.tmdb_id === movie.id && m.status === "watchlist"
-    );
-    
-    const isInWatched = userMovies.some(
-      (m) => m.tmdb_id === movie.id && m.status === "watched");
+  const isInWatchlist = userMovies.some(
+    (m) => m.tmdb_id === movie.id && m.status === "watchlist"
+  );
+
+  const isInWatched = userMovies.some(
+    (m) => m.tmdb_id === movie.id && m.status === "watched"
+  );
 
   const addMovie = async (movie, status) => {
-
     if (status === "watched") {
       const existingInWatchlist = userMovies.find(
         (m) => m.tmdb_id === movie.id && m.status === "watchlist"
       );
 
       if (existingInWatchlist) {
-        await axiosPrivateInstance.delete(`/auth/watchlist/delete/${existingInWatchlist.id}`);
+        await axiosPrivateInstance.delete(
+          `/auth/watchlist/delete/${existingInWatchlist.id}`
+        );
       }
     }
 
@@ -94,71 +97,86 @@ export default function MovieCardDiscover({ movie, userMovies, fetchData }) {
           Rating: {movie.vote_average ? movie.vote_average : "N/A"}
         </Badge>
       </VStack>
-      <VStack>
-        <Heading size="md">{movie.original_title}</Heading>
-        <Text
-          padding={3}
-          color="gray"
-          ref={ref}
-          className={`break-words text-xl ${!isShowingMore && "line-clamp-3"}`}
-          style={{
-            overflow: "hidden",
-            display: "-webkit-box",
-            WebkitLineClamp: isShowingMore ? "unset" : 3,
-            WebkitBoxOrient: "vertical",
-          }}
-        >
-          {movie.overview}
-        </Text>
+      <Box
+        maxW="sm"
+        borderWidth="1px"
+        display="flex"
+        flexDirection="column"
+        height={isShowingMore ? "auto" : "250px"}
+      >
+        <VStack>
+          <Center>
+            <Heading size="md" textAlign="center">
+              {movie.original_title}
+            </Heading>
+          </Center>
 
-        {isTruncated && (
-          <Button variant="surface" onClick={toggleIsShowingMore}>
-            {isShowingMore ? "Show less" : "Show more"}
-          </Button>
-        )}
-      </VStack>
+          <Text
+            padding={3}
+            color="gray"
+            ref={ref}
+            className={`break-words text-xl ${
+              !isShowingMore && "line-clamp-3"
+            }`}
+            style={{
+              overflow: "hidden",
+              display: "-webkit-box",
+              WebkitLineClamp: isShowingMore ? "unset" : 3,
+              WebkitBoxOrient: "vertical",
+              height: isShowingMore ? "auto" : "5.5em",
+            }}
+          >
+            {movie.overview}
+          </Text>
+
+          {isTruncated && (
+            <Button variant="surface" onClick={toggleIsShowingMore}>
+              {isShowingMore ? "Show less" : "Show more"}
+            </Button>
+          )}
+        </VStack>
+      </Box>
       <Center paddingBottom={2}>
-  <VStack spacing={4} align="stretch">
-    {/* Already in watched list */}
-    {isInWatched && (
-      <Button colorScheme="pink" variant="solid" isDisabled>
-        Already in Watched
-      </Button>
-    )}
+        <VStack spacing={4} align="stretch">
+          {/* Already in watched list */}
+          {isInWatched && (
+            <Button colorScheme="pink" variant="solid" isDisabled>
+              Already in Watched
+            </Button>
+          )}
 
-    {/* Already in watchlist but not in watched */}
-    {!isInWatched && isInWatchlist && (
-      <Button colorScheme="teal" variant="solid" isDisabled>
-        Already in Watchlist
-      </Button>
-    )}
+          {/* Already in watchlist but not in watched */}
+          {!isInWatched && isInWatchlist && (
+            <Button colorScheme="teal" variant="solid" isDisabled>
+              Already in Watchlist
+            </Button>
+          )}
 
-    {/* Show 'Add to Watchlist' if not in any list */}
-    {!isInWatchlist && !isInWatched && (
-      <Button
-        leftIcon={<AddIcon color="red.500" boxSize={4} />}
-        variant="outline"
-        colorScheme="teal"
-        onClick={() => addMovie(movie, "watchlist")}
-      >
-        Add to Watchlist!
-      </Button>
-    )}
+          {/* Show 'Add to Watchlist' if not in any list */}
+          {!isInWatchlist && !isInWatched && (
+            <Button
+              leftIcon={<AddIcon color="red.500" boxSize={4} />}
+              variant="outline"
+              colorScheme="teal"
+              onClick={() => addMovie(movie, "watchlist")}
+            >
+              Add to Watchlist!
+            </Button>
+          )}
 
-    {/* Show 'Already watched' if not in watched */}
-    {!isInWatched && (
-      <Button
-        leftIcon={<ViewIcon color="red.500" boxSize={4} />}
-        variant="outline"
-        colorScheme="pink"
-        onClick={() => addMovie(movie, "watched")}
-      >
-        Already watched!
-      </Button>
-    )}
-  </VStack>
-</Center>
-
+          {/* Show 'Already watched' if not in watched */}
+          {!isInWatched && (
+            <Button
+              leftIcon={<ViewIcon color="red.500" boxSize={4} />}
+              variant="outline"
+              colorScheme="pink"
+              onClick={() => addMovie(movie, "watched")}
+            >
+              Already watched!
+            </Button>
+          )}
+        </VStack>
+      </Center>
     </VStack>
   );
 }

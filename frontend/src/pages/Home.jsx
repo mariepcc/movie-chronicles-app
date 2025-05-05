@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
 import useAxiosPrivate from "../hooks/usePrivate"
+import useAuth from "../hooks/useAuth";
 import {
   ChakraProvider,
   Center,
@@ -21,6 +22,7 @@ const TMDB_API_KEY = "95f1c012c3da9231ef8a54bdffe0485e";
 const BASE_URL = "https://api.themoviedb.org/3/search/movie";
 
 export default function Home() {
+  const { isLoggedIn } = useAuth();
   const [allMovies, setAllMovies] = useState("");
   const [refreshData, setRefreshData] = useState(false);
   const axiosPrivateInstance = useAxiosPrivate()
@@ -30,13 +32,15 @@ export default function Home() {
   }
 
   useEffect(() => {
+    if (!isLoggedIn) return;
+
     axiosPrivateInstance
       .get(`auth/movies`)
       .then((res) => {
         setAllMovies(res.data);
       })
       .catch((err) => alert(err));
-  }, [refreshData]);
+  }, [refreshData, isLoggedIn]);
   
   return (
     <ChakraProvider>

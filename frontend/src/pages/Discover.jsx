@@ -1,4 +1,4 @@
-import { useState, useEffect} from "react";
+import { useState, useEffect } from "react";
 import MovieCardDiscover from "../components/MovieCardDiscover";
 //import { colorPalettes } from "compositions/lib/color-palettes"
 import {
@@ -49,14 +49,14 @@ export default function Discover({ allMovies, refreshData }) {
       )}
       <SimpleGrid columns={4} spacing={8}>
         {searchResults.length !== 0 &&
-          searchResults.map((movie) => 
-              <MovieCardDiscover
-                key={movie.id}
-                movie={movie}
-                userMovies={allMovies}
-                fetchData={refreshData}
-              />
-            )}
+          searchResults.map((movie) => (
+            <MovieCardDiscover
+              key={movie.id}
+              movie={movie}
+              userMovies={allMovies}
+              fetchData={refreshData}
+            />
+          ))}
       </SimpleGrid>
     </VStack>
   );
