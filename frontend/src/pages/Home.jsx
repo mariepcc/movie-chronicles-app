@@ -25,6 +25,8 @@ export default function Home() {
   const { isLoggedIn } = useAuth();
   const [allMovies, setAllMovies] = useState("");
   const [refreshData, setRefreshData] = useState(false);
+  const [tabIndex, setTabIndex] = useState(0);
+
   const axiosPrivateInstance = useAxiosPrivate();
 
   const fetchData = () => {
@@ -46,7 +48,13 @@ export default function Home() {
     <ChakraProvider>
       <Center color="white" minHeight="100vh" padding={8}>
         <VStack spacing={7} width="100%">
-          <Tabs variant="soft-rounded" colorScheme="yellow" width="100%">
+          <Tabs
+            index={tabIndex}
+            onChange={(index) => setTabIndex(index)}
+            variant="soft-rounded"
+            colorScheme="yellow"
+            width="100%"
+          >
             <TabList justifyContent="center" gap={4} minHeight="48px">
               <Tab
                 minHeight="48px"
@@ -104,7 +112,10 @@ export default function Home() {
                 <Watched allMovies={allMovies} refreshData={fetchData} />
               </TabPanel>
               <TabPanel>
-                <Recommended allMovies={allMovies} refreshData={fetchData} />
+                <Recommended
+                  refreshData={fetchData}
+                  isActive={tabIndex === 3}
+                />
               </TabPanel>
             </TabPanels>
           </Tabs>

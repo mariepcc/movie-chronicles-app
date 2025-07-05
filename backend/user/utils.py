@@ -56,3 +56,11 @@ def save_rating(
         timestamp = int(time.time())
         writer.writerow([user_id, movie_id, rating, timestamp])
         print("Rating saved!")
+
+
+def normalize_title(title):
+    match = re.match(r"^(.*),\s(The|An|A)$", title, re.IGNORECASE)
+    if match:
+        main, article = match.groups()
+        return f"{article} {main}"
+    return title

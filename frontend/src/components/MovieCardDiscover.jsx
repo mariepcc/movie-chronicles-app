@@ -33,6 +33,10 @@ export default function MovieCardDiscover({ movie, userMovies, fetchData }) {
     (m) => m.tmdb_id === movie.id && m.status === "watched"
   );
 
+  function isMostlyEnglish(text) {
+    return /^[\x00-\x7F]*$/.test(text); // checks if all characters are ASCII (i.e. no Korean, Arabic etc.)
+  }
+
   const addMovie = async (movie, status) => {
     if (status === "watched") {
       const existingInWatchlist = userMovies.find(

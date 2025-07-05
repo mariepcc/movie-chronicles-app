@@ -17,7 +17,7 @@ from rest_framework_simplejwt import (
     exceptions as jwt_exceptions,
 )
 from user import serializers, models
-from .utils import find_movie_id_by_title_and_year, save_rating
+from .utils import find_movie_id_by_title_and_year, save_rating, normalize_title
 from .recommend import recommend
 import os
 import requests
@@ -286,10 +286,13 @@ def recommendView(request):
 
     for movie, predicted_rating in recommended:
         title = movie.split(" (")[0]
+        title = normalize_title(title)
+        print(f"Processing movie: {title}")
         year_match = re.search(r"\((\d{4})\)", movie)
         year = year_match.group(1) if year_match else ""
 
         if title in user_movies:
+            print(f"Skipping already watched movie: {title} ({year})")
             continue
 
         try:

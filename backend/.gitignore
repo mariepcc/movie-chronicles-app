@@ -11,6 +11,7 @@ db.sqlite3
 db.sqlite3-journal
 media
 .env
+myenv
 /Users/marysiapacocha/Desktop/projects/MovieChronicles-App/backend/user/movies.csv
 /Users/marysiapacocha/Desktop/projects/MovieChronicles-App/backend/user/ratings.csv
 

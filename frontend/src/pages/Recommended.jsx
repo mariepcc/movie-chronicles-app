@@ -5,7 +5,7 @@ import MovieCard from "../components/MovieCard";
 import useAuth from "../hooks/useAuth";
 import { VStack, SimpleGrid, Text, Center } from "@chakra-ui/react";
 
-export default function Recommended({ refreshData }) {
+export default function Recommended({ refreshData, isActive }) {
   const { isLoggedIn } = useAuth();
   const [isLoading, setIsLoading] = useState(false);
   const [loadedOnce, setLoadedOnce] = useState(false);
@@ -16,7 +16,7 @@ export default function Recommended({ refreshData }) {
     if (isLoggedIn) {
       getRecommendations();
     }
-  }, [isLoggedIn]);
+  }, [isActive, isLoggedIn]);
 
   const getRecommendations = async () => {
     setIsLoading(true);
