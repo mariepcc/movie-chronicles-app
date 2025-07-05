@@ -24,11 +24,11 @@ export default function Navbar() {
   const navLinkStyle = (isActive) => ({
     fontWeight: isActive ? "bold" : "normal",
     color: isActive ? activeColor : "inherit",
-    padding: "8px",
+    padding: "26px",
     borderRadius: "md",
     textDecoration: "none",
     transition: "0.2s ease",
-    borderBottom: isActive ? "3px solid white" : "3px solid transparent",
+    borderBottom: isActive ? "2px solid white" : "3px solid transparent",
     _hover: {
       backgroundColor: linkHoverBg,
     },
@@ -37,9 +37,10 @@ export default function Navbar() {
   return (
     <Box
       as="nav"
-      bg="black"
+      bg="#2D2D2D"
       color="white"
       width="100%"
+      position="relative"
       _after={{
         content: '""',
         position: "absolute",

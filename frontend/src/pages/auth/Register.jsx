@@ -49,7 +49,7 @@ export default function Register() {
 
   return (
     <Box
-      maxW="md"
+      w={{ base: "90%", md: "400px" }}
       mx="auto"
       mt={10}
       p={8}
@@ -113,7 +113,7 @@ export default function Register() {
           </FormControl>
 
           <Button
-            colorScheme="teal"
+            colorScheme="yellow"
             type="submit"
             isLoading={loading}
             loadingText="Registering..."

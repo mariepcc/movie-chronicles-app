@@ -12,26 +12,47 @@ import PersistLogin from "./components/PersistLogin";
 import Navbar from "./components/Navbar";
 
 function App() {
+  const appStyle = {
+    minHeight: "100vh", // full viewport height minimum
+    backgroundImage: `url(https://img.freepik.com/premium-photo/dust-scratches-overlay-isolated-dust-scratches-ruined-surface-black-background_943071-27.jpg)`,
+    backgroundSize: "cover",
+    backgroundAttachment: "fixed",
+    backgroundPosition: "center",
+    backgroundRepeat: "no-repeat",
+    display: "flex", // flex container to control layout
+    flexDirection: "column",
+  };
+
+  const contentStyle = {
+    flexGrow: 1, // content area grows to fill space
+    display: "flex",
+    flexDirection: "column",
+  };
+
   return (
     <>
-      <Navbar />
-      <Routes>
-        <Route path="/" element={<PersistLogin />}>
-          <Route index exact element={<Home />}></Route>
-          <Route path="/auth">
-            <Route path="login" element={<Login />}></Route>
-            <Route path="register" element={<Register />}></Route>
-            <Route element={<AuthMiddleware />}>
-              <Route path="user" element={<User />} />
-              <Route path="discover" element={<Discover />} />
-              <Route path="watchlist" element={<Watchlist />} />
-              <Route path="watched" element={<Watched />} />
-              <Route path="recommended" element={<Recommended />} />
+      <div style={appStyle}>
+        <Navbar />
+        <main style={contentStyle}>
+          <Routes>
+            <Route path="/" element={<PersistLogin />}>
+              <Route index element={<Home />} />
+              <Route path="auth">
+                <Route path="login" element={<Login />} />
+                <Route path="register" element={<Register />} />
+                <Route element={<AuthMiddleware />}>
+                  <Route path="user" element={<User />} />
+                  <Route path="discover" element={<Discover />} />
+                  <Route path="watchlist" element={<Watchlist />} />
+                  <Route path="watched" element={<Watched />} />
+                  <Route path="recommended" element={<Recommended />} />
+                </Route>
+              </Route>
             </Route>
-          </Route>
-        </Route>
-        <Route path="*" element={<Navigate to="/" />}></Route>
-      </Routes>
+            <Route path="*" element={<Navigate to="/" />} />
+          </Routes>
+        </main>
+      </div>
     </>
   );
 }

@@ -88,15 +88,14 @@ export default function MovieCardDiscover({ movie, userMovies, fetchData }) {
         width={40}
         height={60}
         paddingTop={2}
+        borderRadius="lg"
       />
       <Badge borderRadius="full" px="2" colorScheme="teal">
         {movie.release_date}
       </Badge>
-      <VStack>
-        <Badge colorScheme="red">
-          Rating: {movie.vote_average ? movie.vote_average : "N/A"}
-        </Badge>
-      </VStack>
+      <Badge borderRadius="full" colorScheme="red">
+        Rating: {movie.vote_average ? movie.vote_average : "N/A"}
+      </Badge>
       <Box
         maxW="sm"
         borderWidth="1px"
@@ -106,14 +105,19 @@ export default function MovieCardDiscover({ movie, userMovies, fetchData }) {
       >
         <VStack>
           <Center>
-            <Heading size="md" textAlign="center">
+            <Heading
+              size="md"
+              textAlign="center"
+              marginTop="15px"
+              fontFamily={`'Cinzel', serif`}
+            >
               {movie.original_title}
             </Heading>
           </Center>
 
           <Text
             padding={3}
-            color="gray"
+            color="white"
             ref={ref}
             className={`break-words text-xl ${
               !isShowingMore && "line-clamp-3"
@@ -155,10 +159,19 @@ export default function MovieCardDiscover({ movie, userMovies, fetchData }) {
           {/* Show 'Add to Watchlist' if not in any list */}
           {!isInWatchlist && !isInWatched && (
             <Button
-              leftIcon={<AddIcon color="red.500" boxSize={4} />}
+              leftIcon={
+                <AddIcon
+                  color="white"
+                  boxSize={4}
+                  paddingRight="3px"
+                  marginBottom="3px"
+                />
+              }
               variant="outline"
               colorScheme="teal"
               onClick={() => addMovie(movie, "watchlist")}
+              display="flex"
+              alignItems="center"
             >
               Add to Watchlist!
             </Button>
@@ -167,7 +180,14 @@ export default function MovieCardDiscover({ movie, userMovies, fetchData }) {
           {/* Show 'Already watched' if not in watched */}
           {!isInWatched && (
             <Button
-              leftIcon={<ViewIcon color="red.500" boxSize={4} />}
+              leftIcon={
+                <ViewIcon
+                  color="white"
+                  boxSize={5}
+                  paddingRight="3px"
+                  marginBottom="3px"
+                />
+              }
               variant="outline"
               colorScheme="pink"
               onClick={() => addMovie(movie, "watched")}

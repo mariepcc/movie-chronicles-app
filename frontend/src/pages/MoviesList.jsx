@@ -30,7 +30,7 @@ export default function MoviesList({ status, allMovies, refreshData }) {
       {status === "watchlist" && (
         <Text fontFamily="Special Elite">
           Start building your movie queue! Add titles, explore your picks, and
-          check off them as you watch!
+          check them off as you watch!
         </Text>
       )}
       {status === "watched" && (
@@ -42,6 +42,7 @@ export default function MoviesList({ status, allMovies, refreshData }) {
       <HStack spacing={12}>
         <Input
           width="600px"
+          textColor="white"
           borderRadius="xl"
           placeholder="Search movie..."
           value={query}

@@ -10,6 +10,7 @@ local_settings.py
 db.sqlite3
 db.sqlite3-journal
 media
+.env
 /Users/marysiapacocha/Desktop/projects/MovieChronicles-App/backend/user/movies.csv
 /Users/marysiapacocha/Desktop/projects/MovieChronicles-App/backend/user/ratings.csv
 

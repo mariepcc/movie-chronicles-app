@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import useAxiosPrivate from "../hooks/usePrivate"
+import useAxiosPrivate from "../hooks/usePrivate";
 import useAuth from "../hooks/useAuth";
 import {
   ChakraProvider,
@@ -10,7 +10,7 @@ import {
   TabPanels,
   Tab,
   TabPanel,
-  Heading
+  Heading,
 } from "@chakra-ui/react";
 
 import Discover from "./Discover";
@@ -25,11 +25,11 @@ export default function Home() {
   const { isLoggedIn } = useAuth();
   const [allMovies, setAllMovies] = useState("");
   const [refreshData, setRefreshData] = useState(false);
-  const axiosPrivateInstance = useAxiosPrivate()
+  const axiosPrivateInstance = useAxiosPrivate();
 
   const fetchData = () => {
-    setRefreshData(!refreshData)
-  }
+    setRefreshData(!refreshData);
+  };
 
   useEffect(() => {
     if (!isLoggedIn) return;
@@ -41,24 +41,56 @@ export default function Home() {
       })
       .catch((err) => alert(err));
   }, [refreshData, isLoggedIn]);
-  
+
   return (
     <ChakraProvider>
-      <Center bg="black" color="white" minHeight="100vh" padding={8}>
+      <Center color="white" minHeight="100vh" padding={8}>
         <VStack spacing={7} width="100%">
-          <Tabs variant="soft-rounded" colorScheme="red" width="100%">
-            <TabList justifyContent="center" gap={4}>
-              <Tab>
-                <Heading size="md">Discover</Heading>
+          <Tabs variant="soft-rounded" colorScheme="yellow" width="100%">
+            <TabList justifyContent="center" gap={4} minHeight="48px">
+              <Tab
+                minHeight="48px"
+                display="flex"
+                alignItems="center"
+                justifyContent="center"
+                textColor={"white"}
+              >
+                <Heading size="md" fontFamily="'Special Elite', cursive" m={0}>
+                  Discover
+                </Heading>
               </Tab>
-              <Tab>
-                <Heading size="md">Watchlist</Heading>
+              <Tab
+                minHeight="48px"
+                display="flex"
+                alignItems="center"
+                justifyContent="center"
+                textColor={"white"}
+              >
+                <Heading size="md" fontFamily="'Special Elite', cursive" m={0}>
+                  Watchlist
+                </Heading>
               </Tab>
-              <Tab>
-                <Heading size="md">Watched</Heading>
+              <Tab
+                minHeight="48px"
+                display="flex"
+                alignItems="center"
+                justifyContent="center"
+                textColor={"white"}
+              >
+                <Heading size="md" fontFamily="'Special Elite', cursive" m={0}>
+                  Watched
+                </Heading>
               </Tab>
-              <Tab>
-                <Heading size="md">Recommended</Heading>
+              <Tab
+                minHeight="48px"
+                display="flex"
+                alignItems="center"
+                justifyContent="center"
+                textColor={"white"}
+              >
+                <Heading size="md" fontFamily="'Special Elite', cursive" m={0}>
+                  Recommended
+                </Heading>
               </Tab>
             </TabList>
             <TabPanels>
@@ -72,7 +104,7 @@ export default function Home() {
                 <Watched allMovies={allMovies} refreshData={fetchData} />
               </TabPanel>
               <TabPanel>
-                <Recommended allMovies={allMovies} refreshData={fetchData}/>
+                <Recommended allMovies={allMovies} refreshData={fetchData} />
               </TabPanel>
             </TabPanels>
           </Tabs>
@@ -80,4 +112,4 @@ export default function Home() {
       </Center>
     </ChakraProvider>
   );
-};
+}

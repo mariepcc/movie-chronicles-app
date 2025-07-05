@@ -33,7 +33,7 @@ export default function Recommended({ refreshData }) {
   };
 
   return (
-    <div>
+    <VStack spacing={7} paddingTop={5}>
       <Center>
         <Text>Ready for something new? These movies match your vibe!</Text>
       </Center>
@@ -74,6 +74,6 @@ export default function Recommended({ refreshData }) {
           ) : null}
         </>
       )}
-    </div>
+    </VStack>
   );
 }

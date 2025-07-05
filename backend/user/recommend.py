@@ -4,8 +4,12 @@ from surprise.model_selection import train_test_split
 from surprise import accuracy
 
 # Load the MovieLens dataset
-RATINGS_CSV = "backend/user/ratings.csv"
-MOVIES_CSV = "backend/user/movies.csv"
+RATINGS_CSV = (
+    "/Users/marysiapacocha/Desktop/filmy/movie-chronicles-app/backend/user/ratings.csv"
+)
+MOVIES_CSV = (
+    "/Users/marysiapacocha/Desktop/filmy/movie-chronicles-app/backend/user/movies.csv"
+)
 
 
 column_names = ["userId", "movieId", "rating", "timestamp"]

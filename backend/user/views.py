@@ -26,15 +26,18 @@ import time
 import json
 from django.http import JsonResponse, StreamingHttpResponse, HttpResponse
 from dotenv import load_dotenv
-import openai
 
 LAST_ID = 2204
 load_dotenv()
-openai.api_key = os.getenv("OPENAI_API_KEY")
-RATINGS_CSV = "ratings.csv"
-MOVIES_CSV = "movies.csv"
+TMDB_API_KEY = os.getenv("TMDB_API_KEY")
+
+RATINGS_CSV = (
+    "/Users/marysiapacocha/Desktop/filmy/movie-chronicles-app/backend/user/ratings.csv"
+)
+MOVIES_CSV = (
+    "/Users/marysiapacocha/Desktop/filmy/movie-chronicles-app/backend/user/movies.csv"
+)
 BASE_URL = "https://api.themoviedb.org/3/search/movie"
-TMDB_API_KEY = "95f1c012c3da9231ef8a54bdffe0485e"
 LLAMA_URL = "http://localhost:11434/api/generate"
 
 
@@ -274,6 +277,9 @@ def recommendView(request):
     user_movies = models.Movie.objects.filter(
         author=user_id, status__in=[models.Movie.WATCHLIST, models.Movie.WATCHED]
     ).values_list("original_title", flat=True)
+
+    print(user_movies)
+
     recommended = recommend(int(user_id) + LAST_ID, 32)
 
     movie_results = []
