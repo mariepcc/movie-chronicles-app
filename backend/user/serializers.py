@@ -1,12 +1,9 @@
 from rest_framework import serializers
-from django.conf import settings
 from django.contrib.auth import get_user_model
 from .models import Movie
 
 
-
 class RegistrationSerializer(serializers.ModelSerializer):
-
     password2 = serializers.CharField(style={"input_type": "password"})
 
     class Meta:
@@ -14,7 +11,7 @@ class RegistrationSerializer(serializers.ModelSerializer):
         fields = ("first_name", "last_name", "email", "password", "password2")
         extra_kwargs = {
             "password": {"write_only": True},
-            "password2": {"write_only": True}
+            "password2": {"write_only": True},
         }
 
     def save(self):
@@ -28,8 +25,7 @@ class RegistrationSerializer(serializers.ModelSerializer):
         password2 = self.validated_data["password2"]
 
         if password != password2:
-            raise serializers.ValidationError(
-                {"password": "Passwords do not match!"})
+            raise serializers.ValidationError({"password": "Passwords do not match!"})
 
         user.set_password(password)
         user.save()
@@ -39,8 +35,7 @@ class RegistrationSerializer(serializers.ModelSerializer):
 
 class LoginSerializer(serializers.Serializer):
     email = serializers.EmailField()
-    password = serializers.CharField(
-        style={"input_type": "password"}, write_only=True)
+    password = serializers.CharField(style={"input_type": "password"}, write_only=True)
 
 
 class UserSerializer(serializers.ModelSerializer):
@@ -52,8 +47,20 @@ class UserSerializer(serializers.ModelSerializer):
 class MovieSerializer(serializers.ModelSerializer):
     class Meta:
         model = Movie
-        fields = ["id", "original_title", "tmdb_id", "overview", "release_date", "vote_average", "status", "rating", "poster_path", "author"]
-        extra_kwargs = {"author": {"read_only":True}}
+        fields = [
+            "id",
+            "original_title",
+            "tmdb_id",
+            "overview",
+            "release_date",
+            "vote_average",
+            "status",
+            "rating",
+            "poster_path",
+            "author",
+        ]
+        extra_kwargs = {"author": {"read_only": True}}
+
 
 class RecommendationSerializer(serializers.Serializer):
     movie = serializers.CharField()

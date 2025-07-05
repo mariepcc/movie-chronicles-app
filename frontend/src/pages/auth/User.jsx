@@ -10,7 +10,6 @@ import {
   Text,
   Stack,
   Button,
-  Spinner,
   useColorModeValue,
   Divider,
 } from "@chakra-ui/react";
@@ -75,7 +74,7 @@ export default function User() {
 
         <Button
           mt={6}
-          colorScheme="red"
+          colorScheme="orange"
           onClick={onLogout}
           isLoading={loading}
           loadingText="Logging out"

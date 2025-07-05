@@ -1,11 +1,10 @@
-import React, { useRef, useState, useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import ModalComponent from "./Modal";
 import ReactStars from "react-stars";
 import useAxiosPrivate from "../hooks/usePrivate";
 import { DeleteIcon, ViewIcon } from "@chakra-ui/icons";
 import {
   VStack,
-  HStack,
   Text,
   Button,
   Heading,
@@ -191,6 +190,7 @@ export default function MovieCard({ status, movie, fetchData }) {
               textAlign="center"
               wordBreak="break-word"
               lineHeight="normal"
+              fontFamily="'Cinzel', serif"
               noOfLines={3}
               className="title-text"
             >
@@ -267,6 +267,7 @@ export default function MovieCard({ status, movie, fetchData }) {
             w="90px"
             h="70px"
             p={1}
+            fontSize="15px"
             display="flex"
             flexDirection="column"
             justifyContent="space-between"

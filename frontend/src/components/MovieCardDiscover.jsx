@@ -1,5 +1,5 @@
 import useTruncatedElement from "../hooks/useTruncatedElement";
-import { useState, useEffect, useRef } from "react";
+import { useRef } from "react";
 import useAxiosPrivate from "../hooks/usePrivate";
 import { AddIcon, ViewIcon } from "@chakra-ui/icons";
 import {

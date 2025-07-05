@@ -4,8 +4,9 @@ from surprise.model_selection import train_test_split
 from surprise import accuracy
 
 # Load the MovieLens dataset
-RATINGS_CSV = '/Users/marysiapacocha/Desktop/projects/MovieChronicles-App/backend/user/ratings.csv'
-MOVIES_CSV = '/Users/marysiapacocha/Desktop/projects/MovieChronicles-App/backend/user/movies.csv'
+RATINGS_CSV = "backend/user/ratings.csv"
+MOVIES_CSV = "backend/user/movies.csv"
+
 
 column_names = ["userId", "movieId", "rating", "timestamp"]
 df = pd.read_csv(RATINGS_CSV, sep=",", names=column_names)
@@ -62,6 +63,6 @@ def recommend(user_id, num_recommendations=5):
     top_items_with_titles = [
         (movie_titles[item_id], rating) for item_id, rating in top_items
     ]
-    
+
     # Return the top N recommended items with titles
     return top_items_with_titles

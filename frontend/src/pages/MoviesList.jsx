@@ -28,7 +28,7 @@ export default function MoviesList({ status, allMovies, refreshData }) {
   return (
     <VStack spacing={7} paddingTop={5}>
       {status === "watchlist" && (
-        <Text>
+        <Text fontFamily="Special Elite">
           Start building your movie queue! Add titles, explore your picks, and
           check off them as you watch!
         </Text>
@@ -42,6 +42,7 @@ export default function MoviesList({ status, allMovies, refreshData }) {
       <HStack spacing={12}>
         <Input
           width="600px"
+          borderRadius="xl"
           placeholder="Search movie..."
           value={query}
           onChange={(e) => setQuery(e.target.value)}

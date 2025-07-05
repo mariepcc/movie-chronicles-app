@@ -18,9 +18,8 @@ export default function Navbar() {
   const { isLoggedIn } = useAuth();
   const { isOpen, onToggle } = useDisclosure();
 
-  // Hooks used at the top level
-  const linkHoverBg = useColorModeValue("gray.200", "gray.700");
-  const activeColor = useColorModeValue("teal.600", "teal.300");
+  const linkHoverBg = useColorModeValue("orange.300", "orange.300");
+  const activeColor = useColorModeValue("orange.300", "orange.300");
 
   const navLinkStyle = (isActive) => ({
     fontWeight: isActive ? "bold" : "normal",
@@ -29,6 +28,7 @@ export default function Navbar() {
     borderRadius: "md",
     textDecoration: "none",
     transition: "0.2s ease",
+    borderBottom: isActive ? "3px solid white" : "3px solid transparent",
     _hover: {
       backgroundColor: linkHoverBg,
     },
@@ -39,7 +39,7 @@ export default function Navbar() {
       as="nav"
       bg="black"
       color="white"
-      position="relative" 
+      width="100%"
       _after={{
         content: '""',
         position: "absolute",
@@ -54,13 +54,14 @@ export default function Navbar() {
         <Text
           fontSize="2xl"
           fontWeight="extrabold"
-          bgGradient="linear(to-r, teal.500, pink.200)"
+          bgGradient="linear(to-r, orange.500, yellow.200)"
           bgClip="text"
-          fontFamily="heading"
+          fontFamily="'Cinzel', serif"
           letterSpacing="wide"
           mt={3}
+          marginLeft="15px"
         >
-          MovieChronicles&nbsp;🎬
+          Movie Chronicles&nbsp;🎬
         </Text>
         <IconButton
           display={{ base: "block", md: "none" }}
@@ -99,7 +100,6 @@ export default function Navbar() {
         </HStack>
       </Flex>
 
-      {/* Mobile Menu */}
       <Collapse in={isOpen} animateOpacity>
         <VStack display={{ md: "none" }} mt={4} spacing={2} align="start">
           <NavLink to="/" style={({ isActive }) => navLinkStyle(isActive)}>
