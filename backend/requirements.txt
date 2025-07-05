@@ -8,9 +8,9 @@ python-decouple==3.8
 pytz==2023.3
 sqlparse==0.4.4
 numpy==1.26.4
+Pillow==11.3.0
 pandas
 requests
 dotenv
-Pillow==11.3.0
 surprise
-openailangchain_openai
+numpy
