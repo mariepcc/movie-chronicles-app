@@ -27,7 +27,7 @@ import json
 from django.http import JsonResponse, StreamingHttpResponse, HttpResponse
 from dotenv import load_dotenv
 
-LAST_ID = 2204
+LAST_ID = 2205
 load_dotenv()
 TMDB_API_KEY = os.getenv("TMDB_API_KEY")
 

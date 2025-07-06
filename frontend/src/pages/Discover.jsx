@@ -22,7 +22,7 @@ export default function Discover({ allMovies, refreshData }) {
 
   const OnSearchClick = async () => {
     const response = await fetch(
-      `https://api.themoviedb.org/3/search/movie?api_key=${TMDB_API_KEY}&include_adult=false&language=en-US&page=1&query=${searchQuery}`
+      `https://api.themoviedb.org/3/search/movie?api_key=${TMDB_API_KEY}&include_adult=false&language=en-US&page=1&query=${searchQuery}&language=en-US`
     );
     const data = await response.json();
     setSearchResults(data.results);

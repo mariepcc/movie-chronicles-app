@@ -33,10 +33,6 @@ export default function MovieCardDiscover({ movie, userMovies, fetchData }) {
     (m) => m.tmdb_id === movie.id && m.status === "watched"
   );
 
-  function isMostlyEnglish(text) {
-    return /^[\x00-\x7F]*$/.test(text); // checks if all characters are ASCII (i.e. no Korean, Arabic etc.)
-  }
-
   const addMovie = async (movie, status) => {
     if (status === "watched") {
       const existingInWatchlist = userMovies.find(
@@ -52,7 +48,7 @@ export default function MovieCardDiscover({ movie, userMovies, fetchData }) {
 
     axiosPrivateInstance
       .post("auth/movies", {
-        original_title: movie.original_title,
+        original_title: movie.title,
         tmdb_id: movie.id,
         overview: movie.overview,
         release_date: movie.release_date,
@@ -115,7 +111,7 @@ export default function MovieCardDiscover({ movie, userMovies, fetchData }) {
               marginTop="15px"
               fontFamily={`'Cinzel', serif`}
             >
-              {movie.original_title}
+              {movie.title}
             </Heading>
           </Center>
 

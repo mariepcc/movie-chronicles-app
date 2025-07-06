@@ -35,7 +35,10 @@ export default function Recommended({ refreshData, isActive }) {
   return (
     <VStack spacing={7} paddingTop={5}>
       <Center>
-        <Text>Ready for something new? These movies match your vibe!</Text>
+        <Text>
+          Ready for something new? These movies match your vibe! The more movies
+          you watch, the better the recs get!
+        </Text>
       </Center>
 
       {isLoading ? (
